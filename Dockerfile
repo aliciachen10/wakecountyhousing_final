@@ -13,10 +13,17 @@ RUN python3 -m pip install --upgrade pip
 ADD ./python_requirements.txt /
 RUN python3 -m pip install -r python_requirements.txt
 
+
 ADD ./data/response.csv /
 ADD ./data/explanatory_subset.csv /
 ADD ./model.py /
 ADD ./app.py /
 
+ADD run.sh /run.sh
+RUN chmod a+x run.sh
 
-CMD [ "python3", "-u", "./app.py" ]
+#CMD [ "python3", "-u", "./app.py" ]
+
+CMD ["sh","-c","python3 model.py && python3 app.py"]
+
+#CMD ["python3 model.py && python3 app.py"]

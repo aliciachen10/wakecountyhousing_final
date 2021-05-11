@@ -15,9 +15,9 @@ def multiple_linear_regression():
     3. check that assumptions for linear regression are met"""
 
     # load data sets
-    response = pd.read_csv("data/response.csv")
-    #df = pd.read_csv("data/explanatory.csv")
-    df = pd.read_csv("data/explanatory_subset.csv")
+    response = pd.read_csv("response.csv")
+    #df = pd.read_csv("~/data/explanatory.csv")
+    df = pd.read_csv("explanatory_subset.csv")
 
     # split data into training and test datasets
     X_train, X_test, y_train, y_test = train_test_split(df, response, test_size=0.3, random_state=11556)
