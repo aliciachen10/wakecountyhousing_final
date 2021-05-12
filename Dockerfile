@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM python:3.9-slim-buster
 
 MAINTAINER Alicia Chen "aliciachen10@gmail.com"
 
@@ -7,13 +7,13 @@ RUN apt -y update &&\
 
 ENV PYTHON_VERSION 3.9.4
 
-#RUN python3 -m pip install --upgrade pip
+RUN python3 -m pip install --upgrade pip
 
 COPY . .
 #ADD ./python_requirements.txt /
 RUN python3 -m pip install -r python_requirements.txt
 
-EXPOSE 5000
+#EXPOSE 5000
 
 #ADD ./data/response.csv /
 #ADD ./data/explanatory_subset.csv /
