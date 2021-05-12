@@ -1,14 +1,35 @@
-version: "3.6"
-
+version: '3.5'
 services:
-    nginx:
-        image: nginx:1.13.7
-        ports:
-            - 80:80
+   nginx:
+      image: nginx:latest
+      container_name: nginx
+      depends_on:
+         - flask
+      volumes:
+         - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      networks:
+         - my-network
+      ports:
+         - "80:80"
+   flask:
+      build:
+         context: ./
+         dockerfile: Dockerfile
+      image: flask:0.0.1
+      container_name: flask
+      volumes:
+         - ../scripts:/scripts
+      environment:
+         - FLASK_APP=app.py
+      command: flask run --host=0.0.0.0
+      networks:
+         my-network:
+            aliases:
+               - flask-app
+      ports:
+         - "5000:5000"
 
-  flask:
-    build : .
-    volumes : 
-     - ../scripts:/scripts
-    ports:
-     - 11111:11111
+networks:
+   my-network:
+      driver: bridge
+
