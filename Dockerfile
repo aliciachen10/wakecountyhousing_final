@@ -18,6 +18,7 @@ RUN python3 -m pip install -r python_requirements.txt
 
 ADD ./data/response.csv /
 ADD ./data/explanatory_subset.csv /
+COPY ./templates/index.html /templates /
 ADD ./model.py /
 ADD ./app.py /
 
