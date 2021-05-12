@@ -1,4 +1,4 @@
-FROM python:3.9-slim-buster
+FROM ubuntu:18.04
 
 MAINTAINER Alicia Chen "aliciachen10@gmail.com"
 
@@ -7,26 +7,26 @@ RUN apt -y update &&\
 
 ENV PYTHON_VERSION 3.9.4
 
-EXPOSE 5000
+#RUN python3 -m pip install --upgrade pip
 
-RUN python3 -m pip install --upgrade pip
-
- 
-ADD ./python_requirements.txt /
+COPY . .
+#ADD ./python_requirements.txt /
 RUN python3 -m pip install -r python_requirements.txt
 
+EXPOSE 5000
 
-ADD ./data/response.csv /
-ADD ./data/explanatory_subset.csv /
-COPY ./templates/index.html /templates /
-ADD ./model.py /
-ADD ./app.py /
+#ADD ./data/response.csv /
+#ADD ./data/explanatory_subset.csv /
+#ADD ./templates ./templates 
+#ADD ./model.pkl /
+#ADD ./model.py /
+#ADD ./app.py /
 
-ADD run.sh /run.sh
-RUN chmod a+x run.sh
+#ADD run.sh /run.sh
+#RUN chmod a+x run.sh
 
-#CMD [ "python3", "-u", "./run.sh" ]
+CMD [ "python3", "-u", "./app.py" ]
 
-CMD ["sh","-c","python3 model.py && python3 app.py"] #WORKING VERSION
+#CMD ["sh","-c","python3 model.py && python3 app.py"] #WORKING VERSION
 
 #CMD ["python3 model.py && python3 app.py"]
