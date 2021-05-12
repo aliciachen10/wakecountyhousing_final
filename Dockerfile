@@ -7,6 +7,8 @@ RUN apt -y update &&\
 
 ENV PYTHON_VERSION 3.9.4
 
+EXPOSE 5000
+
 RUN python3 -m pip install --upgrade pip
 
  
@@ -22,8 +24,8 @@ ADD ./app.py /
 ADD run.sh /run.sh
 RUN chmod a+x run.sh
 
-#CMD [ "python3", "-u", "./app.py" ]
+#CMD [ "python3", "-u", "./run.sh" ]
 
-CMD ["sh","-c","python3 model.py && python3 app.py"]
+CMD ["sh","-c","python3 model.py && python3 app.py"] #WORKING VERSION
 
 #CMD ["python3 model.py && python3 app.py"]
